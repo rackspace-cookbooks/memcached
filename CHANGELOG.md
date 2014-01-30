@@ -1,6 +1,9 @@
-memcached Cookbook CHANGELOG
+rackspace_memcached Cookbook CHANGELOG
 ============================
 This file is used to list changes made in each version of the memcached cookbook.
+v2.0.1
+------
+- now run memcached as 'memcache' user on ubuntu, not 'nobody' 
 
 v2.0.0
 ------
@@ -8,6 +11,7 @@ Rackspace rebuild changes
 - removed support for unsupported OSes (namely: smartos, fedora, suse)
 - removed dependency on yum; it was only necessary before due to now-deprecated RHEL 5 support
 - removed dependency on runit and definition memcached_instance
+
 
 v1.7.0
 ------

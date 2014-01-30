@@ -20,10 +20,10 @@ Attributes
 ----------
 The following are node attributes passed to the template:
 
-- `['rackspace_memcached']['memory']` - maximum memory for memcached instances.
+- `['rackspace_memcached']['memory']` - maximum memory for memcached instances. Default is 64M.
 - `['rackspace_memcached']['user']` - user to run memcached as.
-- `['rackspace_memcached']['port']` - TCP port for memcached to listen on.
-- `['rackspace_memcached']['udp_port']` - UDP port for memcached to listen on.
+- `['rackspace_memcached']['port']` - TCP port for memcached to listen on. Default is 11211.
+- `['rackspace_memcached']['udp_port']` - UDP port for memcached to listen on. Default is 11211.
 - `['rackspace_memcached']['listen']` - IP address for memcache to listen on, defaults to **0.0.0.0** (world accessible).
 - `['rackspace_memcached']['maxconn']` - maximum number of connections to accept (defaults to 1024)
 - `['rackspace_memcached']['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
@@ -32,7 +32,7 @@ The following are node attributes passed to the template:
 
 Usage
 -----
-Simply set the attributes and it will configure the `/etc/memcached.conf` file. If you want to use multiple memcached instances, you'll need to modify the recipe to disable the startup script and the template in the default recipe.
+Simply set the attributes and the cookbook will configure the `/etc/memcached.conf` file (Ubuntu, Debian) or /etc/sysconfig/memcached file (CentOS, RHEL). If you want to use multiple memcached instances, you'll need to modify the recipe to disable the startup script and the template in the default recipe.
 
 The recipe also reads in whether to start up memcached from a `/etc/default/memcached` "ENABLE_MEMCACHED" setting, which is "yes" by default.
 

@@ -25,8 +25,8 @@ default['rackspace_memcached']['maxconn'] = 1024
 default['rackspace_memcached']['max_object_size'] = '1m'
 default['rackspace_memcached']['logfilename'] = 'memcached.log'
 
-case node['platform_family']
-when 'rhel'
+case node['platform']
+when 'redhat', 'centos'
   default['rackspace_memcached']['user'] = 'memcached'
   default['rackspace_memcached']['group'] = 'memcached'
 when 'ubuntu'
