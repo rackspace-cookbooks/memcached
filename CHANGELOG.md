@@ -2,6 +2,12 @@ memcached Cookbook CHANGELOG
 ============================
 This file is used to list changes made in each version of the memcached cookbook.
 
+v2.0.0
+------
+Rackspace rebuild changes
+- removed support for unsupported OSes (namely: smartos, fedora, suse)
+- removed dependency on yum (now called 'rackspace_yum' repository, due to deprecated RHEL 5 support)
+- removed dependency on runit, and removed definition memcached_instance
 
 v1.7.0
 ------

@@ -1,27 +1,20 @@
 memcached Cookbook
 ==================
-[![Build Status](https://secure.travis-ci.org/opscode-cookbooks/memcached.png?branch=master)](http://travis-ci.org/opscode-cookbooks/memcached)
 
-
-Installs memcached and provides a define to set up an instance of memcache via runit.
-
+Installs memcached and provides a template for its main configuration file.
 
 Requirements
 ------------
-A runit service can be set up for instances using the `memcache_instance` definition.
 
 ### Platforms
-- Ubuntu 10.04, 12.04
-- CentOS 5.8, 6.3
-- openSUSE 12.3
-- SLES 12 SP2
-- SmartOS base64 1.8.1 - Note that SMF directly configures memcached with no opportunity to alter settings. If you need custom parameters, use the `memcached_instance` provider instead.
+- CentOS 6.4
+- Ubuntu 12.04
+- Debian 7.2
 
 May work on other systems with or without modification.
 
 ### Cookbooks
-- runit
-
+This cook book does not depend on any other cookbooks
 
 Attributes
 ----------
@@ -41,12 +34,6 @@ Usage
 -----
 Simply set the attributes and it will configure the `/etc/memcached.conf` file. If you want to use multiple memcached instances, you'll need to modify the recipe to disable the startup script and the template in the default recipe.
 
-Use the definition, `memcached_instance`, to set up a runit service for the named memcached instance.
-
-```ruby
-memcached_instance 'myproj'
-```
-
 The recipe also reads in whether to start up memcached from a `/etc/default/memcached` "ENABLE_MEMCACHED" setting, which is "yes" by default.
 
 
@@ -54,10 +41,12 @@ License & Authors
 -----------------
 - Author:: Joshua Timberman (<joshua@opscode.com>)
 - Author:: Joshua Sierles (<joshua@37signals.com>)
+- Author:: Kent Shultz (<kent.shultz@rackspace.com>)
 
 ```text
 Copyright:: 2009-2012, Opscode, Inc
 Copyright:: 2009, 37signals
+Copyright:: 2014, Rackspace, US Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

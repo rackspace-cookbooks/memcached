@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: memcached
+# Cookbook Name:: rackspace_memcached
 # Attributes:: default
 #
-# Copyright 2009-2013, Opscode, Inc.
+# Copyright 2014, Rackspace, US Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,25 +17,25 @@
 # limitations under the License.
 #
 
-default['memcached']['memory'] = 64
-default['memcached']['port'] = 11_211
-default['memcached']['udp_port'] = 11_211
-default['memcached']['listen'] = '0.0.0.0'
-default['memcached']['maxconn'] = 1024
-default['memcached']['max_object_size'] = '1m'
-default['memcached']['logfilename'] = 'memcached.log'
+default['rackspace_memcached']['memory'] = 64
+default['rackspace_memcached']['port'] = 11_211
+default['rackspace_memcached']['udp_port'] = 11_211
+default['rackspace_memcached']['listen'] = '0.0.0.0'
+default['rackspace_memcached']['maxconn'] = 1024
+default['rackspace_memcached']['max_object_size'] = '1m'
+default['rackspace_memcached']['logfilename'] = 'memcached.log'
 
 case node['platform_family']
-when 'suse', 'fedora', 'rhel'
-  default['memcached']['user'] = 'memcached'
-  default['memcached']['group'] = 'memcached'
+when 'rhel'
+  default['rackspace_memcached']['user'] = 'memcached'
+  default['rackspace_memcached']['group'] = 'memcached'
 when 'ubuntu'
-  default['memcached']['user'] = 'memcache'
-  default['memcached']['group'] = 'memcache'
+  default['rackspace_memcached']['user'] = 'memcache'
+  default['rackspace_memcached']['group'] = 'memcache'
 when 'debian'
-  default['memcached']['user'] = 'nobody'
-  default['memcached']['group'] = 'nogroup'
+  default['rackspace_memcached']['user'] = 'nobody'
+  default['rackspace_memcached']['group'] = 'nogroup'
 else
-  default['memcached']['user'] = 'nobody'
-  default['memcached']['user'] = 'nogroup'
+  default['rackspace_memcached']['user'] = 'nobody'
+  default['rackspace_memcached']['user'] = 'nogroup'
 end

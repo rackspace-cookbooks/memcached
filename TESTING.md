@@ -47,7 +47,5 @@ Development
     - `bundle exec kitchen test`
 
 7. Assuming the tests pass, open a Pull Request on GitHub
-8. Open a JIRA ticket for this compontent, linking the JIRA ticket to the Pull Request and visa versa.
-9. Mark the JIRA ticket as "Fix Provided"
 
-For more information, see [Opscode's Contribution Guidelines](https://wiki.opscode.com/display/chef/How+to+Contribute).
+For more information, see the [Rackspace Contributing Guide](https://github.com/rackspace-cookbooks/contributing).

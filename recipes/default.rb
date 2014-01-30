@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: memcached
+# Cookbook Name:: rackspace_memcached
 # Recipe:: default
 #
-# Copyright 2009-2013, Opscode, Inc.
+# Copyright 2014, Rackspace, US Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,58 +17,37 @@
 # limitations under the License.
 #
 
-# include epel on redhat/centos 5 and below in order to get the memcached packages
-include_recipe 'yum-epel' if node['platform_family'] == 'rhel' && node['platform_version'].to_i == 5
-
 package 'memcached'
 
-package 'libmemcache-dev' do
-  case node['platform_family']
-  when 'rhel', 'fedora'
-    package_name 'libmemcached-devel'
-  when 'smartos'
-    package_name 'libmemcached'
-  when 'suse'
-    if node['platform_version'].to_f < 12
-      package_name 'libmemcache-devel'
-    else
-      package_name 'libmemcached-devel'
-    end
-  else
-    package_name 'libmemcache-dev'
-  end
+case node['platform_family']
+when 'rhel'
+  package 'libmemcached-devel'
+else
+  package 'libmemcache-dev'
 end
 
 service 'memcached' do
   action :nothing
-  supports :status => true, :start => true, :stop => true, :restart => true
+  supports status: true, start: true, stop: true, restart: true
 end
 
 case node['platform_family']
-when 'rhel', 'fedora', 'suse'
-  family = node['platform_family'] == 'suse' ? 'suse' : 'redhat'
+when 'rhel'
   template '/etc/sysconfig/memcached' do
-    source "memcached.sysconfig.#{family}.erb"
+    source 'memcached.sysconfig.redhat.erb'
     owner 'root'
     group 'root'
     mode  '0644'
     variables(
-      :listen      => node['memcached']['listen'],
-      :user        => node['memcached']['user'],
-      :group       => node['memcached']['group'],
-      :port        => node['memcached']['port'],
-      :udp_port    => node['memcached']['udp_port'],
-      :maxconn     => node['memcached']['maxconn'],
-      :memory      => node['memcached']['memory'],
-      :logfilename => node['memcached']['logfilename']
+      listen:      node['rackspace_memcached']['listen'],
+      user:        node['rackspace_memcached']['user'],
+      port:        node['rackspace_memcached']['port'],
+      udp_port:    node['rackspace_memcached']['udp_port'],
+      maxconn:     node['rackspace_memcached']['maxconn'],
+      memory:      node['rackspace_memcached']['memory'],
+      logfilename: node['rackspace_memcached']['logfilename']
     )
     notifies :restart, 'service[memcached]'
-  end
-when 'smartos'
-  # SMF directly configures memcached with no opportunity to alter settings
-  # If you need custom parameters, use the memcached_instance provider
-  service 'memcached' do
-    action :enable
   end
 else
   template '/etc/memcached.conf' do
@@ -77,13 +56,13 @@ else
     group  'root'
     mode   '0644'
     variables(
-      :listen          => node['memcached']['listen'],
-      :user            => node['memcached']['user'],
-      :port            => node['memcached']['port'],
-      :udp_port        => node['memcached']['udp_port'],
-      :maxconn         => node['memcached']['maxconn'],
-      :memory          => node['memcached']['memory'],
-      :max_object_size => node['memcached']['max_object_size']
+      listen:          node['rackspace_memcached']['listen'],
+      user:            node['rackspace_memcached']['user'],
+      port:            node['rackspace_memcached']['port'],
+      udp_port:        node['rackspace_memcached']['udp_port'],
+      maxconn:         node['rackspace_memcached']['maxconn'],
+      memory:          node['rackspace_memcached']['memory'],
+      max_object_size: node['rackspace_memcached']['max_object_size']
     )
     notifies :restart, 'service[memcached]'
   end
