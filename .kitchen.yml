@@ -20,7 +20,10 @@ platforms:
 suites:
 - name: default
   run_list:
-    - recipe[memcached::default]
-- name: instance
-  run_list:
-    - recipe[fake::instance]
+    - recipe[rackspace_memcached::default]
+#
+# unnecessary since we removed the memcached_instance definition
+# 
+#- name: instance
+#  run_list:
+#    - recipe[fake::instance]

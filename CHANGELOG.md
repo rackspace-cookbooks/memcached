@@ -6,8 +6,8 @@ v2.0.0
 ------
 Rackspace rebuild changes
 - removed support for unsupported OSes (namely: smartos, fedora, suse)
-- removed dependency on yum (now called 'rackspace_yum' repository, due to deprecated RHEL 5 support)
-- removed dependency on runit, and removed definition memcached_instance
+- removed dependency on yum; it was only necessary before due to now-deprecated RHEL 5 support
+- removed dependency on runit and definition memcached_instance
 
 v1.7.0
 ------

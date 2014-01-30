@@ -1,4 +1,4 @@
-memcached Cookbook
+rackspace_memcached Cookbook
 ==================
 
 Installs memcached and provides a template for its main configuration file.
@@ -18,16 +18,16 @@ This cook book does not depend on any other cookbooks
 
 Attributes
 ----------
-The following are node attributes passed to the template for the runit service.
+The following are node attributes passed to the template:
 
-- `memcached['memory']` - maximum memory for memcached instances.
-- `memcached['user']` - user to run memcached as.
-- `memcached['port']` - TCP port for memcached to listen on.
-- `memcached['udp_port']` - UDP port for memcached to listen on.
-- `memcached['listen']` - IP address for memcache to listen on, defaults to **0.0.0.0** (world accessible).
-- `memcached['maxconn']` - maximum number of connections to accept (defaults to 1024)
-- `memcached['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
-- `memcached['logfilename']` - logfile to which memcached output will be redirected in /var/log/$logfilename.
+- `['rackspace_memcached']['memory']` - maximum memory for memcached instances.
+- `['rackspace_memcached']['user']` - user to run memcached as.
+- `['rackspace_memcached']['port']` - TCP port for memcached to listen on.
+- `['rackspace_memcached']['udp_port']` - UDP port for memcached to listen on.
+- `['rackspace_memcached']['listen']` - IP address for memcache to listen on, defaults to **0.0.0.0** (world accessible).
+- `['rackspace_memcached']['maxconn']` - maximum number of connections to accept (defaults to 1024)
+- `['rackspace_memcached']['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
+- `['rackspace_memcached']['logfilename']` - logfile to which memcached output will be redirected in /var/log/$logfilename.
 
 
 Usage
