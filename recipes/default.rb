@@ -39,13 +39,13 @@ when 'rhel'
     group 'root'
     mode  '0644'
     variables(
-      listen:      node['rackspace_memcached']['listen'],
-      user:        node['rackspace_memcached']['user'],
-      port:        node['rackspace_memcached']['port'],
-      udp_port:    node['rackspace_memcached']['udp_port'],
-      maxconn:     node['rackspace_memcached']['maxconn'],
-      memory:      node['rackspace_memcached']['memory'],
-      logfilename: node['rackspace_memcached']['logfilename']
+      listen:      node['rackspace_memcached']['config']['listen'],
+      user:        node['rackspace_memcached']['config']['user'],
+      port:        node['rackspace_memcached']['config']['port'],
+      udp_port:    node['rackspace_memcached']['config']['udp_port'],
+      maxconn:     node['rackspace_memcached']['config']['maxconn'],
+      memory:      node['rackspace_memcached']['config']['memory'],
+      logfilename: node['rackspace_memcached']['config']['logfilename']
     )
     notifies :restart, 'service[memcached]'
   end
@@ -56,13 +56,13 @@ else
     group  'root'
     mode   '0644'
     variables(
-      listen:          node['rackspace_memcached']['listen'],
-      user:            node['rackspace_memcached']['user'],
-      port:            node['rackspace_memcached']['port'],
-      udp_port:        node['rackspace_memcached']['udp_port'],
-      maxconn:         node['rackspace_memcached']['maxconn'],
-      memory:          node['rackspace_memcached']['memory'],
-      max_object_size: node['rackspace_memcached']['max_object_size']
+      listen:          node['rackspace_memcached']['config']['listen'],
+      user:            node['rackspace_memcached']['config']['user'],
+      port:            node['rackspace_memcached']['config']['port'],
+      udp_port:        node['rackspace_memcached']['config']['udp_port'],
+      maxconn:         node['rackspace_memcached']['config']['maxconn'],
+      memory:          node['rackspace_memcached']['config']['memory'],
+      max_object_size: node['rackspace_memcached']['config']['max_object_size']
     )
     notifies :restart, 'service[memcached]'
   end

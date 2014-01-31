@@ -17,25 +17,25 @@
 # limitations under the License.
 #
 
-default['rackspace_memcached']['memory'] = 64
-default['rackspace_memcached']['port'] = 11_211
-default['rackspace_memcached']['udp_port'] = 11_211
-default['rackspace_memcached']['listen'] = '0.0.0.0'
-default['rackspace_memcached']['maxconn'] = 1024
-default['rackspace_memcached']['max_object_size'] = '1m'
-default['rackspace_memcached']['logfilename'] = 'memcached.log'
+default['rackspace_memcached']['config']['memory'] = 64
+default['rackspace_memcached']['config']['port'] = 11_211
+default['rackspace_memcached']['config']['udp_port'] = 11_211
+default['rackspace_memcached']['config']['listen'] = '0.0.0.0'
+default['rackspace_memcached']['config']['maxconn'] = 1024
+default['rackspace_memcached']['config']['max_object_size'] = '1m'
+default['rackspace_memcached']['config']['logfilename'] = 'memcached.log'
 
 case node['platform']
 when 'redhat', 'centos'
-  default['rackspace_memcached']['user'] = 'memcached'
-  default['rackspace_memcached']['group'] = 'memcached'
+  default['rackspace_memcached']['config']['user'] = 'memcached'
+  default['rackspace_memcached']['config']['group'] = 'memcached'
 when 'ubuntu'
-  default['rackspace_memcached']['user'] = 'memcache'
-  default['rackspace_memcached']['group'] = 'memcache'
+  default['rackspace_memcached']['config']['user'] = 'memcache'
+  default['rackspace_memcached']['config']['group'] = 'memcache'
 when 'debian'
-  default['rackspace_memcached']['user'] = 'nobody'
-  default['rackspace_memcached']['group'] = 'nogroup'
+  default['rackspace_memcached']['config']['user'] = 'nobody'
+  default['rackspace_memcached']['config']['group'] = 'nogroup'
 else
-  default['rackspace_memcached']['user'] = 'nobody'
-  default['rackspace_memcached']['user'] = 'nogroup'
+  default['rackspace_memcached']['config']['user'] = 'nobody'
+  default['rackspace_memcached']['config']['user'] = 'nogroup'
 end
