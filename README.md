@@ -36,6 +36,13 @@ Simply set the attributes and the cookbook will configure the `/etc/memcached.co
 
 The recipe also reads in whether to start up memcached from a `/etc/default/memcached` "ENABLE_MEMCACHED" setting, which is "yes" by default.
 
+Contributing
+------------
+* See contributing guidelines [here](https://github.com/rackspace-cookbooks/contributing/blob/master/CONTRIBUTING.md)
+
+Testing
+-------
+* See contributing guidelines [here](https://github.com/rackspace-cookbooks/contributing/blob/master/CONTRIBUTING.md)
 
 License & Authors
 -----------------
