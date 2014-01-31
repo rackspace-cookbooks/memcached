@@ -62,8 +62,16 @@ else
       udp_port:        node['rackspace_memcached']['config']['udp_port'],
       maxconn:         node['rackspace_memcached']['config']['maxconn'],
       memory:          node['rackspace_memcached']['config']['memory'],
-      max_object_size: node['rackspace_memcached']['config']['max_object_size']
+      max_object_size: node['rackspace_memcached']['config']['max_object_size'],
+      logfilename:     node['rackspace_memcached']['config']['logfilename']
     )
     notifies :restart, 'service[memcached]'
   end
+end
+
+template '/etc/logrotate.d/memcached' do
+  source 'memcached.logrotate.erb'
+  owner  'root'
+  group  'root'
+  mode   '0644'
 end

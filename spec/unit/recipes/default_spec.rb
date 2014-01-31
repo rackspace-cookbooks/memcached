@@ -51,4 +51,5 @@ describe 'memcached::default' do
       expect(template).to notify('service[memcached]').to(:restart)
     end
   end
+
 end

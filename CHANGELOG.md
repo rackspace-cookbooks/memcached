@@ -1,6 +1,13 @@
 rackspace_memcached Cookbook CHANGELOG
 ============================
 This file is used to list changes made in each version of the memcached cookbook.
+
+v2.0.2
+------
+- Add ['config'] into config hash
+- Add logrotate
+- Make logfilename attribute fully qualified
+
 v2.0.1
 ------
 - now run memcached as 'memcache' user on ubuntu, not 'nobody' 

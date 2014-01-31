@@ -18,12 +18,12 @@
 #
 
 default['rackspace_memcached']['config']['memory'] = 64
-default['rackspace_memcached']['config']['port'] = 11_211
-default['rackspace_memcached']['config']['udp_port'] = 11_211
+default['rackspace_memcached']['config']['port'] = '11211'
+default['rackspace_memcached']['config']['udp_port'] = '11211'
 default['rackspace_memcached']['config']['listen'] = '0.0.0.0'
 default['rackspace_memcached']['config']['maxconn'] = 1024
 default['rackspace_memcached']['config']['max_object_size'] = '1m'
-default['rackspace_memcached']['config']['logfilename'] = 'memcached.log'
+default['rackspace_memcached']['config']['logfilename'] = '/var/log/memcached.log'
 
 case node['platform']
 when 'redhat', 'centos'
