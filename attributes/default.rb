@@ -17,25 +17,26 @@
 # limitations under the License.
 #
 
-default['rackspace_memcached']['config']['memory'] = 64
-default['rackspace_memcached']['config']['port'] = '11211'
-default['rackspace_memcached']['config']['udp_port'] = '11211'
-default['rackspace_memcached']['config']['listen'] = '0.0.0.0'
-default['rackspace_memcached']['config']['maxconn'] = 1024
-default['rackspace_memcached']['config']['max_object_size'] = '1m'
-default['rackspace_memcached']['config']['logfilename'] = '/var/log/memcached.log'
+default['rackspace_memcached']['config']['-d'] = {value: true, comment: 'run as daemon'}
+default['rackspace_memcached']['config']['logfile'] = {value: '/var/log/memcached.log'}
+default['rackspace_memcached']['config']['-v'] = {value: true, comment: 'verbose output'}
+default['rackspace_memcached']['config']['-m'] = {value: 64, comment: 'cache size'}
+default['rackspace_memcached']['config']['-p'] = {value: '11211', comment: 'port'}
+default['rackspace_memcached']['config']['-U'] = {value: '11211', comment: 'udp port'}
+default['rackspace_memcached']['config']['-l'] = {value: '0.0.0.0', comment: 'listen address'}
+default['rackspace_memcached']['config']['-c'] = {value: 1024, comment: 'maximum incoming connections'}
+default['rackspace_memcached']['config']['-I'] = {value: '1m', comment: 'maximum object size'}
+# default['rackspace_memcached']['config']['-vv'] = {value: true, comment: 'extra verbose'}
+# default['rackspace_memcached']['config']['-k'] = {value: true, comment: 'lock down all paged memory'}
+# default['rackspace_memcached']['config']['-M'] = {value: true, comment: 'return error when memory exhausted'}
+# default['rackspace_memcached']['config']['-r'] = {value: true, comment: 'maximize core file limit'}
 
+default['rackspace_memcached']['config']['-u']['comment'] = 'run as user instead of root'
 case node['platform']
 when 'redhat', 'centos'
-  default['rackspace_memcached']['config']['user'] = 'memcached'
-  default['rackspace_memcached']['config']['group'] = 'memcached'
+  default['rackspace_memcached']['config']['-u']['value'] = 'memcached'
 when 'ubuntu'
-  default['rackspace_memcached']['config']['user'] = 'memcache'
-  default['rackspace_memcached']['config']['group'] = 'memcache'
-when 'debian'
-  default['rackspace_memcached']['config']['user'] = 'nobody'
-  default['rackspace_memcached']['config']['group'] = 'nogroup'
+  default['rackspace_memcached']['config']['-u']['value'] = 'memcache'
 else
-  default['rackspace_memcached']['config']['user'] = 'nobody'
-  default['rackspace_memcached']['config']['user'] = 'nogroup'
+  default['rackspace_memcached']['config']['-u']['value'] = 'nobody'
 end

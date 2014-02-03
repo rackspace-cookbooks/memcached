@@ -39,13 +39,13 @@ when 'rhel'
     group 'root'
     mode  '0644'
     variables(
-      listen:      node['rackspace_memcached']['config']['listen'],
-      user:        node['rackspace_memcached']['config']['user'],
-      port:        node['rackspace_memcached']['config']['port'],
-      udp_port:    node['rackspace_memcached']['config']['udp_port'],
-      maxconn:     node['rackspace_memcached']['config']['maxconn'],
-      memory:      node['rackspace_memcached']['config']['memory'],
-      logfilename: node['rackspace_memcached']['config']['logfilename']
+      listen:      node['rackspace_memcached']['config']['-l']['value'],
+      user:        node['rackspace_memcached']['config']['-u']['value'],
+      port:        node['rackspace_memcached']['config']['-p']['value'],
+      udp_port:    node['rackspace_memcached']['config']['-U']['value'],
+      maxconn:     node['rackspace_memcached']['config']['-c']['value'],
+      memory:      node['rackspace_memcached']['config']['-m']['value'],
+      logfilename: node['rackspace_memcached']['config']['logfile']['value']
     )
     notifies :restart, 'service[memcached]'
   end
@@ -56,14 +56,7 @@ else
     group  'root'
     mode   '0644'
     variables(
-      listen:          node['rackspace_memcached']['config']['listen'],
-      user:            node['rackspace_memcached']['config']['user'],
-      port:            node['rackspace_memcached']['config']['port'],
-      udp_port:        node['rackspace_memcached']['config']['udp_port'],
-      maxconn:         node['rackspace_memcached']['config']['maxconn'],
-      memory:          node['rackspace_memcached']['config']['memory'],
-      max_object_size: node['rackspace_memcached']['config']['max_object_size'],
-      logfilename:     node['rackspace_memcached']['config']['logfilename']
+      config:          node['rackspace_memcached']['config']
     )
     notifies :restart, 'service[memcached]'
   end
