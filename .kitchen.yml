@@ -1,72 +1,25 @@
 ---
-driver_plugin: vagrant
-driver_plugin: digitalocean
-driver_config:
-  digitalocean_client_id: <%= ENV['DIGITAL_OCEAN_CLIENT_ID'] %>
-  digitalocean_api_key: <%= ENV['DIGITAL_OCEAN_API_KEY'] %>
-  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %> 
-  aws_secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
-  aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %>
-  ssh_key: <%= ENV['AWS_PRIVATE_KEY_PATH'] %>
-  rackspace_username: <%= ENV['RACKSPACE_USERNAME'] %>
-  rackspace_api_key: <%= ENV['RACKSPACE_API_KEY'] %>
-  require_chef_omnibus: latest
+driver:
+  name: rackspace
+  require_chef_omnibus: '11.8.2'
+  rackspace_username: <%= ENV['rackspace_username'] %>
+  rackspace_api_key:  <%= ENV['rackspace_api_key'] %>
+  rackspace_region: 'ord'
+  public_key_path: <%= ENV['sshpubkey'] %>
+  ssh_key: <%= ENV['ssh_key'] %>
 
 platforms:
-- name: centos-5.8
-  driver_plugin: digitalocean
-  driver_config:
-    image_id: 1601
-    flavor_id: 63
-    region_id: 1
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-
 - name: centos-6.4
-  driver_plugin: digitalocean
   driver_config:
-    image_id: 562354
-    flavor_id: 63
-    region_id: 1
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-
-- name: amazon-2013.09
-  driver_plugin: ec2
+    image_id: 'f70ed7c7-b42e-4d77-83d8-40fa29825b85'
+- name: ubuntu-12.04
   driver_config:
-    image_id: ami-3be4bc52
-    username: ec2-user
-
-# - name: fedora-19
-#   driver_plugin: digitalocean
-#   driver_config:
-#     image_id: 696598
-#     flavor_id: 63
-#     region_id: 1
-#     ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-
-- name: ubuntu-1004
-  driver_plugin: digitalocean
+    image_id: '80fbcb55-b206-41f9-9bc2-2dd7aac6c061'
+- name: debian-7.2
   driver_config:
-    image_id: 14097
-    flavor_id: 63
-    region_id: 1
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-  run_list:
-  - recipe[apt]
-
-- name: ubuntu-1204
-  driver_plugin: digitalocean
-  driver_config:
-    image_id: 1015253
-    flavor_id: 63
-    region_id: 1
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-  run_list:
-  - recipe[apt]
+    image_id: '857d7d36-34f3-409f-8435-693e8797be8b'
 
 suites:
-  - name: default
-    run_list:
-      - recipe[memcached::default]
-  - name: instance
-    run_list:
-      - recipe[fake::instance]
+- name: default
+  run_list:
+    - recipe[rackspace_memcached::default]

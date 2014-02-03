@@ -1,63 +1,68 @@
-memcached Cookbook
+rackspace_memcached Cookbook
 ==================
-[![Build Status](https://secure.travis-ci.org/opscode-cookbooks/memcached.png?branch=master)](http://travis-ci.org/opscode-cookbooks/memcached)
 
-
-Installs memcached and provides a define to set up an instance of memcache via runit.
-
+Installs memcached and provides a template for its main configuration file.
 
 Requirements
 ------------
-A runit service can be set up for instances using the `memcache_instance` definition.
 
 ### Platforms
-- Ubuntu 10.04, 12.04
-- CentOS 5.8, 6.3
-- openSUSE 12.3
-- SLES 12 SP2
-- SmartOS base64 1.8.1 - Note that SMF directly configures memcached with no opportunity to alter settings. If you need custom parameters, use the `memcached_instance` provider instead.
+- CentOS 6.4
+- Ubuntu 12.04
+- Debian 7.2
 
 May work on other systems with or without modification.
 
 ### Cookbooks
-- runit
-
+This cook book does not depend on any other cookbooks
 
 Attributes
 ----------
-The following are node attributes passed to the template for the runit service.
+The following are node attributes passed to the template:
 
-- `memcached['memory']` - maximum memory for memcached instances.
-- `memcached['user']` - user to run memcached as.
-- `memcached['port']` - TCP port for memcached to listen on.
-- `memcached['udp_port']` - UDP port for memcached to listen on.
-- `memcached['listen']` - IP address for memcache to listen on, defaults to **0.0.0.0** (world accessible).
-- `memcached['maxconn']` - maximum number of connections to accept (defaults to 1024)
-- `memcached['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
-- `memcached['logfilename']` - logfile to which memcached output will be redirected in /var/log/$logfilename.
+- `['rackspace_memcached']['config']['-m']['value']`` - maximum memory for memcached instances, in MB. Default is 64.
+- `['rackspace_memcached']['config']['-u']['value']`` - user to run memcached as.
+- `['rackspace_memcached']['config']['-p']['value']`` - TCP port for memcached to listen on. Default is 11211.
+- `['rackspace_memcached']['config']['-U']['value']`` - UDP port for memcached to listen on. Default is 11211.
+- `['rackspace_memcached']['config']['-l']['value']`` - IP address for memcache to listen on, defaults to **0.0.0.0** (world accessible).
+- `['rackspace_memcached']['config']['-c']['value']`` - maximum number of connections to accept. Defaults is 1024.
+- `['rackspace_memcached']['config']['-I']['value']`` - maximum size of an object to cache. Default is 1MB.
+- `['rackspace_memcached']['config']['logfile']['value']` - logfile to which memcached output will be redirected. Default is /var/log/memcached.log.
 
 
 Usage
 -----
-Simply set the attributes and it will configure the `/etc/memcached.conf` file. If you want to use multiple memcached instances, you'll need to modify the recipe to disable the startup script and the template in the default recipe.
+Simply set the attributes and the cookbook will configure the `/etc/memcached.conf` file (Ubuntu, Debian) or /etc/sysconfig/memcached file (CentOS, RHEL). If you want to use multiple memcached instances, you'll need to modify the recipe to disable the startup script and the template in the default recipe.
 
-Use the definition, `memcached_instance`, to set up a runit service for the named memcached instance.
+To add an option to the /etc/memcached.conf file (Ubuntu/Debian) that does not have a default value from this cookbook and is not enabled/set by default in memcache, simply define a new attribute that follows the pattern of those in the Attributes section above. For example, to enable extra verbosity, add the following line to your recipe:
 
-```ruby
-memcached_instance 'myproj'
-```
+`node.default['rackspace_memcached']['config']['-vv']['value'] = true`
 
-The recipe also reads in whether to start up memcached from a `/etc/default/memcached` "ENABLE_MEMCACHED" setting, which is "yes" by default.
+The template will render a line with content `-vv`. Note that for this example, you must set the value to boolean `true`, *not* a string `'true'`.
 
+To add an option to the configuration that takes a value (e.g. `-m 128`), you must define the attribute like the following:
+
+`node.default['rackspace_memcached']['config']['-m']['value'] = 128`
+
+
+Contributing
+------------
+* See contributing guidelines [here](https://github.com/rackspace-cookbooks/contributing/blob/master/CONTRIBUTING.md)
+
+Testing
+-------
+* See contributing guidelines [here](https://github.com/rackspace-cookbooks/contributing/blob/master/CONTRIBUTING.md)
 
 License & Authors
 -----------------
 - Author:: Joshua Timberman (<joshua@opscode.com>)
 - Author:: Joshua Sierles (<joshua@37signals.com>)
+- Author:: Kent Shultz (<kent.shultz@rackspace.com>)
 
 ```text
 Copyright:: 2009-2012, Opscode, Inc
 Copyright:: 2009, 37signals
+Copyright:: 2014, Rackspace, US Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

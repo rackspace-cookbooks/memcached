@@ -1,6 +1,30 @@
-memcached Cookbook CHANGELOG
+rackspace_memcached Cookbook CHANGELOG
 ============================
 This file is used to list changes made in each version of the memcached cookbook.
+
+v2.0.3
+------
+- change logrotate template to logrotate_app definition
+  - this adds a dependency on the rackspace_logrotate cookbook
+- generalize the template for /etc/memcached.conf to walk the config hash
+  - supports value/comment convention in the config hash data structure
+
+v2.0.2
+------
+- Add ['config'] into config hash
+- Add logrotate
+- Make logfilename attribute fully qualified
+
+v2.0.1
+------
+- now run memcached as 'memcache' user on ubuntu, not 'nobody' 
+
+v2.0.0
+------
+Rackspace rebuild changes
+- removed support for unsupported OSes (namely: smartos, fedora, suse)
+- removed dependency on yum; it was only necessary before due to now-deprecated RHEL 5 support
+- removed dependency on runit and definition memcached_instance
 
 
 v1.7.0
