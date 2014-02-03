@@ -23,3 +23,13 @@ suites:
 - name: default
   run_list:
     - recipe[rackspace_memcached::default]
+- name: cloudmonitoring
+  run_list:
+    - recipe[rackspace_cloudmonitoring]
+    - recipe[rackspace_cloudmonitoring::agent]
+    - recipe[rackspace_memcached::default]
+  attributes:
+    rackspace:
+      cloud_credentials:
+        username: <%= ENV['rackspace_username'] %>
+        api_key: <%= ENV['rackspace_apt_key'] %>
