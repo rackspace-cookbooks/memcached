@@ -2,6 +2,13 @@ rackspace_memcached Cookbook CHANGELOG
 ============================
 This file is used to list changes made in each version of the memcached cookbook.
 
+v2.0.3
+------
+- change logrotate template to logrotate_app definition
+  - this adds a dependency on the rackspace_logrotate cookbook
+- generalize the template for /etc/memcached.conf to walk the config hash
+  - supports value/comment convention in the config hash data structure
+
 v2.0.2
 ------
 - Add ['config'] into config hash
