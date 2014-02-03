@@ -16,20 +16,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-default['rackspace_memcached']['config']['-d'] = {value: true, comment: 'run as daemon'}
-default['rackspace_memcached']['config']['logfile'] = {value: '/var/log/memcached.log'}
-default['rackspace_memcached']['config']['-v'] = {value: true, comment: 'verbose output'}
-default['rackspace_memcached']['config']['-m'] = {value: 64, comment: 'cache size'}
-default['rackspace_memcached']['config']['-p'] = {value: '11211', comment: 'port'}
-default['rackspace_memcached']['config']['-U'] = {value: '11211', comment: 'udp port'}
-default['rackspace_memcached']['config']['-l'] = {value: '0.0.0.0', comment: 'listen address'}
-default['rackspace_memcached']['config']['-c'] = {value: 1024, comment: 'maximum incoming connections'}
-default['rackspace_memcached']['config']['-I'] = {value: '1m', comment: 'maximum object size'}
-# default['rackspace_memcached']['config']['-vv'] = {value: true, comment: 'extra verbose'}
-# default['rackspace_memcached']['config']['-k'] = {value: true, comment: 'lock down all paged memory'}
-# default['rackspace_memcached']['config']['-M'] = {value: true, comment: 'return error when memory exhausted'}
-# default['rackspace_memcached']['config']['-r'] = {value: true, comment: 'maximize core file limit'}
+default['rackspace_memcached']['templates_cookbook']['sysconfig'] = 'rackspace_memcached'
+default['rackspace_memcached']['templates_cookbook']['memcached_conf'] = 'rackspace_memcached'
+default['rackspace_memcached']['config']['-d'] = { value: true, comment: 'run as daemon' }
+default['rackspace_memcached']['config']['logfile'] = { value: '/var/log/memcached.log' }
+default['rackspace_memcached']['config']['-v'] = { value: true, comment: 'verbose output' }
+default['rackspace_memcached']['config']['-m'] = { value: 64, comment: 'cache size' }
+default['rackspace_memcached']['config']['-p'] = { value: '11211', comment: 'port' }
+default['rackspace_memcached']['config']['-U'] = { value: '11211', comment: 'udp port' }
+default['rackspace_memcached']['config']['-l'] = { value: '0.0.0.0', comment: 'listen address' }
+default['rackspace_memcached']['config']['-c'] = { value: 1024, comment: 'maximum incoming connections' }
+default['rackspace_memcached']['config']['-I'] = { value: '1m', comment: 'maximum object size' }
+# default['rackspace_memcached']['config']['-vv'] = { value: true, comment: 'extra verbose'}
+# default['rackspace_memcached']['config']['-k'] = { value: true, comment: 'lock down all paged memory'}
+# default['rackspace_memcached']['config']['-M'] = { value: true, comment: 'return error when memory exhausted' }
+# default['rackspace_memcached']['config']['-r'] = { value: true, comment: 'maximize core file limit' }
 
 default['rackspace_memcached']['config']['-u']['comment'] = 'run as user instead of root'
 case node['platform']

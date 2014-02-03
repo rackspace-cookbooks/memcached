@@ -34,6 +34,7 @@ end
 case node['platform_family']
 when 'rhel'
   template '/etc/sysconfig/memcached' do
+    cookbook node['rackspace_memcached']['templates_cookbook']['sysconfig']
     source 'memcached.sysconfig.redhat.erb'
     owner 'root'
     group 'root'
@@ -51,6 +52,7 @@ when 'rhel'
   end
 else
   template '/etc/memcached.conf' do
+    cookbook node['rackspace_memcached']['templates_cookbook']['memcached_conf']
     source 'memcached.conf.erb'
     owner  'root'
     group  'root'
@@ -62,9 +64,9 @@ else
   end
 end
 
-template '/etc/logrotate.d/memcached' do
-  source 'memcached.logrotate.erb'
-  owner  'root'
-  group  'root'
-  mode   '0644'
+logrotate_app 'memcached' do
+  path node['rackspace_memcached']['config']['logfile']['value']
+  rotate    7
+  size      '50M'
+  frequency 'daily'
 end

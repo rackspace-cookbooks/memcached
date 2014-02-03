@@ -6,6 +6,8 @@ description       'Installs memcached'
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version           '2.0.2'
 
+depends 'rackspace_logrotate', '~> 2.0'
+
 supports 'centos'
 supports 'debian'
 supports 'redhat'
