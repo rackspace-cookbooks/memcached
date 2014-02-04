@@ -17,16 +17,12 @@
 # limitations under the License.
 #
 
-if File.exists? '/usr/lib/rackspace-monitoring-agent/plugins'
-  cookbook_file '/usr/lib/rackspace-monitoring-agent/plugins/memcached_stats.py' do
-    source 'memcached_stats.py'
-    owner  'root'
-    group  'root'
-    mode   '0755'
-  end
-else
-  Chef::Log.warn "Tried to install memcached_stats.py before /usr/lib/rackspace-monitoring-agent/plugins exists.
-You should include rackspace_cloudmonitoring::agent before rackspace_memcached::monitors."
+cookbook_file '/usr/lib/rackspace-monitoring-agent/plugins/memcached_stats.py' do
+  source  'memcached_stats.py'
+  owner   'root'
+  group   'root'
+  mode    '0755'
+  only_if 'test -d /usr/lib/rackspace-monitoring-agent/plugins'
 end
 
 # optionally specify alarm and notification_plan on a rolebook level
