@@ -4,7 +4,7 @@ maintainer_email  'rackspace-cookbooks@rackspace.com'
 license           'Apache 2.0'
 description       'Installs memcached'
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version           '2.0.3'
+version           '2.0.4'
 
 depends 'rackspace_logrotate', '~> 2.0'
 

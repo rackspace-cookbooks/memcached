@@ -70,5 +70,3 @@ logrotate_app 'memcached' do
   size      '50M'
   frequency 'daily'
 end
-
-include_recipe 'rackspace_memcached::monitors'

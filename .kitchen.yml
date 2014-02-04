@@ -25,10 +25,7 @@ suites:
     - recipe[rackspace_memcached::default]
 - name: cloudmonitoring
   run_list:
-    - recipe[rackspace_cloudmonitoring]
-    - recipe[rackspace_cloudmonitoring::agent]
-    - recipe[rackspace_memcached::default]
-    - recipe[rackspace_cloudmonitoring::monitors]
+    - recipe[with_maas::default]
   attributes:
     rackspace:
       cloud_credentials:

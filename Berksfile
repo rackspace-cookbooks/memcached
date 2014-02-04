@@ -7,5 +7,5 @@ cookbook 'rackspace_yum', '~> 4.0', github: 'rackspace-cookbooks/rackspace_yum'
 
 group :integration do
   cookbook 'rackspace_apt', '~> 3.0', git: 'git@github.com:rackspace-cookbooks/rackspace_apt.git'
-  cookbook 'fake', path: 'test/fixtures/cookbooks/fake'
+  cookbook 'with_maas', path: './test/fixtures/cookbooks/with_maas'
 end

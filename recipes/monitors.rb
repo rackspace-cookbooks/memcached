@@ -17,21 +17,20 @@
 # limitations under the License.
 #
 
-directory '/usr/lib/rackspace-monitoring-agent/plugins/' do
-  action :create
-  only_if { node.recipes.include? 'rackspace_cloudmonitoring::agent' }
-end
-
-cookbook_file '/usr/lib/rackspace-monitoring-agent/plugins/memcached_stats.py' do
-  source 'memcached_stats.py'
-  owner  'root'
-  group  'root'
-  mode   '0755'
-  only_if { node.recipes.include? 'rackspace_cloudmonitoring::agent' }
+if File.exists? '/usr/lib/rackspace-monitoring-agent/plugins'
+  cookbook_file '/usr/lib/rackspace-monitoring-agent/plugins/memcached_stats.py' do
+    source 'memcached_stats.py'
+    owner  'root'
+    group  'root'
+    mode   '0755'
+  end
+else
+  Chef::Log.warn "Tried to install memcached_stats.py before /usr/lib/rackspace-monitoring-agent/plugins exists.
+You should include rackspace_cloudmonitoring::agent before rackspace_memcached::monitors."
 end
 
 # optionally specify alarm and notification_plan on a rolebook level
 node.default['rackspace_cloudmonitoring']['monitors']['memcached_stats']['type'] = 'agent.plugin'
-node.default['rackspace_cloudmonitoring']['monitors']['memcached_stats']['details'] = { file: 'memcached_stats.py', 
+node.default['rackspace_cloudmonitoring']['monitors']['memcached_stats']['details'] = { file: 'memcached_stats.py',
                                                                                         args: ['localhost', node['rackspace_memcached']['config']['-p']['value']]
                                                                                       }
