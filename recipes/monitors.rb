@@ -23,7 +23,7 @@ directory '/usr/lib/rackspace-monitoring-agent/plugins/' do
 end
 
 file '/usr/lib/rackspace-monitoring-agent/plugins/memcached_stats.py' do
-  source 'memcached_stats.py.erb'
+  source 'memcached_stats.py'
   owner  'root'
   group  'root'
   mode   '0755'
