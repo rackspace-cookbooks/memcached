@@ -22,7 +22,7 @@ directory '/usr/lib/rackspace-monitoring-agent/plugins/' do
   only_if { node.recipes.include? 'rackspace_cloudmonitoring::agent' }
 end
 
-file '/usr/lib/rackspace-monitoring-agent/plugins/memcached_stats.py' do
+cookbook_file '/usr/lib/rackspace-monitoring-agent/plugins/memcached_stats.py' do
   source 'memcached_stats.py'
   owner  'root'
   group  'root'
@@ -31,4 +31,7 @@ file '/usr/lib/rackspace-monitoring-agent/plugins/memcached_stats.py' do
 end
 
 # optionally specify alarm and notification_plan on a rolebook level
-node.default['rackspace_cloudmonitoring']['monitors']['memcached_stats'] = { type: 'agent.plugin', details: { file: 'memcached_stats.py' } }
+node.default['rackspace_cloudmonitoring']['monitors']['memcached_stats']['type'] = 'agent.plugin'
+node.default['rackspace_cloudmonitoring']['monitors']['memcached_stats']['details'] = { file: 'memcached_stats.py', 
+                                                                                        args: ['localhost', node['rackspace_memcached']['config']['-p']['value']]
+                                                                                      }

@@ -28,8 +28,9 @@ suites:
     - recipe[rackspace_cloudmonitoring]
     - recipe[rackspace_cloudmonitoring::agent]
     - recipe[rackspace_memcached::default]
+    - recipe[rackspace_cloudmonitoring::monitors]
   attributes:
     rackspace:
       cloud_credentials:
         username: <%= ENV['rackspace_username'] %>
-        api_key: <%= ENV['rackspace_apt_key'] %>
+        api_key: <%= ENV['rackspace_api_key'] %>
