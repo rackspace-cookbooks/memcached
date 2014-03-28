@@ -19,11 +19,14 @@
 
 package 'memcached'
 
-case node['platform_family']
-when 'rhel'
-  package 'libmemcached-devel'
-else
-  package 'libmemcache-dev'
+
+if node['rackspace_memcached']['include_dev_lib']
+  case node['platform_family']
+  when 'rhel'
+    package 'libmemcached-devel'
+  else
+    package 'libmemcache-dev'
+  end
 end
 
 service 'memcached' do

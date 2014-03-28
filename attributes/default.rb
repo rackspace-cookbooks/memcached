@@ -41,3 +41,5 @@ when 'ubuntu'
 else
   default['rackspace_memcached']['config']['-u']['value'] = 'nobody'
 end
+
+default['rackspace_memcached']['include_dev_lib'] = true
