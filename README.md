@@ -28,6 +28,7 @@ The following are node attributes passed to the template:
 - `['rackspace_memcached']['config']['-c']['value']`` - maximum number of connections to accept. Defaults is 1024.
 - `['rackspace_memcached']['config']['-I']['value']`` - maximum size of an object to cache. Default is 1MB.
 - `['rackspace_memcached']['config']['logfile']['value']` - logfile to which memcached output will be redirected. Default is /var/log/memcached.log.
+- `['rackspace_memcached']['include_dev_lib']` - whether or not to install development libraries as well. Default is true
 
 
 Usage
