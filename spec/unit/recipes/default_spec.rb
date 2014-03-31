@@ -21,10 +21,11 @@ describe 'rackspace_memcached::default' do
     end
 
     it 'writes the /etc/sysconfig/memcached' do
-      expect(template).to be
-      expect(template.owner).to eq('root')
-      expect(template.group).to eq('root')
-      expect(template.mode).to eq('0644')
+      expect(chef_run).to create_template('/etc/sysconfig/memcached').with(
+        user: 'root',
+        group: 'root',
+        mode: '0644'
+      )
     end
 
     it 'notifies the service to restart' do
@@ -41,10 +42,11 @@ describe 'rackspace_memcached::default' do
     end
 
     it 'writes the /etc/memcached.conf' do
-      expect(template).to be
-      expect(template.owner).to eq('root')
-      expect(template.group).to eq('root')
-      expect(template.mode).to eq('0644')
+      expect(chef_run).to create_template('/etc/memcached.conf').with(
+        user: 'root',
+        group: 'root',
+        mode: '0644'
+      )
     end
 
     it 'notifies the service to restart' do

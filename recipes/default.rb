@@ -42,15 +42,16 @@ when 'rhel'
     owner 'root'
     group 'root'
     mode  '0644'
-    variables(
+    variables({
       listen:      node['rackspace_memcached']['config']['-l']['value'],
       user:        node['rackspace_memcached']['config']['-u']['value'],
       port:        node['rackspace_memcached']['config']['-p']['value'],
       udp_port:    node['rackspace_memcached']['config']['-U']['value'],
       maxconn:     node['rackspace_memcached']['config']['-c']['value'],
       memory:      node['rackspace_memcached']['config']['-m']['value'],
-      logfilename: node['rackspace_memcached']['config']['logfile']['value']
-    )
+      logfilename: node['rackspace_memcached']['config']['logfile']['value'],
+      cookbook_name: cookbook_name
+    })
     notifies :restart, 'service[memcached]'
   end
 else
@@ -60,9 +61,10 @@ else
     owner  'root'
     group  'root'
     mode   '0644'
-    variables(
-      config:          node['rackspace_memcached']['config']
-    )
+    variables({
+      config:          node['rackspace_memcached']['config'],
+      cookbook_name: cookbook_name
+    })
     notifies :restart, 'service[memcached]'
   end
 end
