@@ -2,6 +2,12 @@ rackspace_memcached Cookbook CHANGELOG
 ============================
 This file is used to list changes made in each version of the memcached cookbook.
 
+V2.0.4
+------
+- Add attribute to decide if we should install dev libraries for memcache
+- remove strainer
+- chefspec coverage
+
 v2.0.3
 ------
 - change logrotate template to logrotate_app definition
