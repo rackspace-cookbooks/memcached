@@ -6,6 +6,7 @@ V2.0.4
 ------
 - Add attribute to decide if we should install dev libraries for memcache
 - remove strainer
+- chefspec coverage
 
 v2.0.3
 ------
